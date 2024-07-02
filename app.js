@@ -5,3 +5,7 @@ titulo.innerHTML = 'Juego del número secreto';
 //genero una variable para el objeto parrafo:
 let parrafo = document.querySelector('p');
 parrafo.innerHTML = 'Ingresa un número del 1 al 10';
+//Definimos y declaramos una funcion
+function intentoDeUsuario() {
+    alert('Click desde el boton');
+}
