@@ -8,6 +8,8 @@ parrafo.innerHTML = 'Ingresa un número del 1 al 10';
 */
 
 let numeroSecreto = generarNumeroSecreto();
+let intentos = 1;
+console.log(numeroSecreto);
 
 function asignarElementoTexto(elemento, texto) {
     let titulo = document.querySelector(elemento);
@@ -20,11 +22,12 @@ function verificarIntento() {
     //la funcion getById me permite buscar elementos por id .value trae el valor que tiene ese elemento
     let numeroDeUsuario = parseInt(document.getElementById('valorUsuario').value);
        
-    console.log(numeroSecreto);
+   
+    
     //=== compara numero y tipo de dato
     if (numeroDeUsuario === numeroSecreto) {
-        //llamo a la funcion ElementoTexto para cambiar el mensaje
-        asignarElementoTexto( 'p' , 'Acertaste el número ');
+        //llamo a la funcion ElementoTexto para cambiar el mensaje y utilizo el operador ternario para la cantidad de intentos
+        asignarElementoTexto( 'p' , `Acertaste el número en ${intentos} ${(intentos === 1) ? 'vez' : 'veces'}`);
     } else {
         if(numeroDeUsuario > numeroSecreto){
             asignarElementoTexto('p', 'El número que yo pense es menor')
@@ -33,9 +36,13 @@ function verificarIntento() {
             asignarElementoTexto('p', 'El número que yo pense es mayor')
 
         }
+        intentos ++;
+        
     }
     return;
 }
+
+
 
 //Creo una funcion para generar un número aleatorio entre 1 y 100
 function generarNumeroSecreto() {
