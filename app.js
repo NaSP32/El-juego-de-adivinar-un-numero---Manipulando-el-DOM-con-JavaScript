@@ -9,6 +9,9 @@ parrafo.innerHTML = 'Ingresa un número del 1 al 10';
 
 let numeroSecreto = 0;
 let intentos = 0;
+let listaNumerosGenerados = []; //Creo una lista o array en donde voy a almacenar los numeros generados para no repetirlos
+let numeroMaximo = 100;
+
 console.log(numeroSecreto);
 
 function asignarElementoTexto(elemento, texto) {
@@ -50,7 +53,27 @@ function limpiarCaja(){
 
 //Creo una funcion para generar un número aleatorio entre 1 y 100
 function generarNumeroSecreto() {
-    return Math.floor(Math.random() * 100)+ 1;
+    let numeroGenerado = Math.floor(Math.random() * numeroMaximo)+ 1;
+    console.log(numeroGenerado);
+    console.log(listaNumerosGenerados);
+    console.log(intentos);
+
+   //Si ya se sortearon todos los numeros posibles
+    if (listaNumerosGenerados.length == numeroMaximo) {
+        //Entrego un mensaje en la pantalla
+       asignarElementoTexto("p", "Ya se sortearon todos los números posibles")
+
+    }else{
+
+        //Si el numeroGenerado esta en la lista hacemos esto, recursividad de la funcion
+            if (listaNumerosGenerados.includes(numeroGenerado)){
+                return generarNumeroSecreto();
+            }else{
+                //si no esta en la lista, lo agrega y retorna su valor
+                listaNumerosGenerados.push(numeroGenerado);
+                return numeroGenerado;
+            }
+    }
     
 }
 
@@ -58,7 +81,7 @@ function generarNumeroSecreto() {
 function condicionesIniciales() {
     //Llamo a la funcion asignarElementoTexto para crear los mensajes en pantalla
     asignarElementoTexto('h1', "Bienvenid@ al juego del número secreto");
-    asignarElementoTexto('p', 'Ingresa un número del 1 al 100');
+    asignarElementoTexto('p', `Ingresa un número del 1 al ${numeroMaximo}`);
     //generamos el numero secreto llamando a la funcion generar numero secreto
     numeroSecreto = generarNumeroSecreto();
     //inicializo los intentos en 1
